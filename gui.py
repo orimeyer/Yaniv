@@ -539,6 +539,9 @@ class YanivGUI:
 # ── Entry point ──────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
+    import os
+    print("הקוד רץ בתוך ה-Container! הנה רשימת הקבצים בתיקייה:")
+    print(os.listdir('.'))
     root = tk.Tk()
     root.geometry("680x620")
     app = YanivGUI(root)
