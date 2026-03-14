@@ -1,0 +1,2 @@
+# This project uses built-in Python libraries (tkinter, random, uuid, etc.)
+# No external pip packages are strictly required.
