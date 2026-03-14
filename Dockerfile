@@ -1,19 +1,21 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11-slim
 
-# Set the working directory inside the container
+# Install system dependencies for GUI (Tkinter/X11)
+RUN apt-get update && apt-get install -y \
+    python3-tk \
+    libx11-6 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the requirements file into the container at /app
-# We do this first to leverage Docker's layer caching
+# Copy requirements and install
 COPY requirements.txt .
-
-# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code into the container
+# Copy application code
 COPY . .
 
-# Run the game when the container launches
-# -it flag will be needed in the command line for user input
-CMD ["python", "main.py"]
+# Run the GUI file instead of main.py
+CMD ["python", "gui.py"]
